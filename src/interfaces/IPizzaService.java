@@ -8,5 +8,7 @@ public interface IPizzaService {
 
 	int ajouterPizza(Pizza p);
 	List<Pizza> getPizza(int nbPizza);
+	boolean existByID(int id);
+	int deleteByID(int id);
 	
 }
