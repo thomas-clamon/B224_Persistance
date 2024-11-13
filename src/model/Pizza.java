@@ -44,7 +44,7 @@ public class Pizza {
 	}
 	@Override
 	public String toString() {
-		return "Pizza [ID=" + ID + ", nom=" + nom + ", prix=" + prix + ", taille=" + taille + "]";
+		return "Pizza [ID=" + ID + ", nom=" + nom + ", prix=" + prix + ", taille=" + taille + "]\n";
 	}
 	
 	

@@ -43,6 +43,10 @@ public class PizzaService implements IPizzaService {
 				float prix = rs.getFloat(3);
 				String taille = rs.getString(4);
 				Pizza p = new Pizza(nom, prix, taille);
+				
+				// on ajoute l'ID
+				p.setID(rs.getInt(1));
+				
 				list.add(p);
 			}
 		} catch (SQLException e) {
@@ -50,6 +54,45 @@ public class PizzaService implements IPizzaService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	@Override
+	public boolean existByID(int id) {
+		
+		String request = String.format("SELECT count(*) FROM Pizzas WHERE ID = %d", id);
+		
+		ResultSet rs = dao.ExecuteQuery(request);
+		try {
+			while(rs.next()) {
+				return (rs.getInt(1) == 1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	@Override
+	public int deleteByID(int id) {
+		// on verifit que l'ID exite
+		boolean exist = this.existByID(id);
+		
+		// si il existe pas on renvoi -2
+		if (!exist)
+			return -2;
+		else
+			{ 
+				String request = String.format("Delete FROM Pizzas WHERE ID = %d", id);
+				System.out.println(request);
+				try {
+					dao.getStatement().executeUpdate(request);
+					return 0;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return -1;
+				}
+			}
 	}
 
 }

@@ -16,6 +16,7 @@ public class Main {
 		System.out.println("Que voulez vous faire");
 		System.out.println("1: Ajouter une pizza");
 		System.out.println("2: Voir les pizzas");
+		System.out.println("3 : Supprimer une pizza");
 		
 		int choice = sc.nextInt();
 		
@@ -34,6 +35,22 @@ public class Main {
 				System.out.println("combien de pizza voulez vous voir?");
 				int nb = sc.nextInt();
 				System.out.println(service.getPizza(nb));
+			case 3 :
+				System.out.println("veuillez indiquer l'ID");
+				int id = sc.nextInt();
+				int deleted = service.deleteByID(id);
+				switch (deleted) {
+				
+					case 0 :
+						System.out.println("pizza supprimé");
+					break;
+					case -2 :
+						System.out.println("pizza n'existe pas");
+					break;
+					case -1 :
+						System.out.println("erreur");
+					
+				}
 		}
 	}
 	
